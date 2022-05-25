@@ -4,7 +4,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, fi
 
 
 def get_new_user_name(user: dict) -> str:
-    return user['username'] if user['username'] != '' else user['first_name']
+    return f"@{user['username']}" if user['username'] != '' else user['first_name']
 
 
 async def send_welcome(update: Update, ctx: CallbackContext) -> None:
