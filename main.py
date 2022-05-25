@@ -2,6 +2,7 @@ from os import getenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
 
+
 def get_new_user_name(user: dict) -> str:
     return user['username'] if user['username'] != '' else user['first_name']
 
@@ -21,7 +22,7 @@ def main() -> None:
         send_welcome
     ))
     app.run_polling()
-
+    
 
 if __name__ == '__main__':
     main()
