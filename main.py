@@ -1,14 +1,12 @@
-import asyncio
-from telegram.bot import Bot
 from os import getenv
+from telegram.ext import ApplicationBuilder, MessageHandler, filters
 
-def init_telegram_connection() -> Bot:
+def main() -> None:
     token = getenv("QDBotToken")
-    app = Bot(token)
-    return app
+    app = ApplicationBuilder().token(token).build()
+    app.add_handler(MessageHandler(filters.ChatType.GROUPS & (filters.StatusUpdate.NEW_CHAT_MEMBERS), None))
+    app.run_polling()
 
-async def main() -> None:
-    app = init_telegram_connection()
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
