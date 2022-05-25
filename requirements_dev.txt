@@ -1,2 +1,2 @@
-python-telegram-bot == 13
+python-telegram-bot == 20.0a0
 pytest == 7.1.2
