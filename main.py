@@ -1,6 +1,8 @@
+from dataclasses import replace
 from os import getenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
+
 
 def get_new_user_name(user: dict) -> str:
     return f"@{user['username']}" if user['username'] != '' else user['first_name']
