@@ -6,8 +6,8 @@ from random import randrange
 
 
 def get_new_user_name(user: dict) -> str:
-    #fallback does not work properly
-    return f"@{user['username']}" if user['username'] != '' else user['first_name']
+    return f"@{user['username']}" if "username" in user else user['first_name']
+
 
 def generate_welcome(new_member: dict) -> str:
     new_member_username = get_new_user_name(new_member)
