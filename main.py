@@ -1,15 +1,15 @@
 from os import getenv
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
+from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters, User
 from json import load
 from random import randrange
 
 
-def get_new_user_name(user: dict) -> str:
+def get_new_user_name(user: User) -> str:
     return f"@{user['username']}" if "username" in user else user['first_name']
 
 
-def generate_welcome(new_member: dict) -> str:
+def generate_welcome(new_member: User) -> str:
     new_member_username = get_new_user_name(new_member)
     print(new_member['language_code'])
 
