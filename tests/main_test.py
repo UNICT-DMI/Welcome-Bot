@@ -1,4 +1,3 @@
-from imghdr import tests
 import pytest
 from pytest_mock import MockerFixture
 import src.main as main
