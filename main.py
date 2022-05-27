@@ -9,21 +9,21 @@ def get_new_user_name(user: dict) -> str:
     #fallback does not work properly
     return f"@{user['username']}" if user['username'] != '' else user['first_name']
 
-def generate_welcome(new_member) -> str:
+def generate_welcome(new_member: dict) -> str:
     new_member_username = get_new_user_name(new_member)
     print(new_member['language_code'])
 
     match new_member["language_code"]:
         case "it":
-            code = "it"
+            lan_code = "it"
         case "en" | _ :
-            code = "en"
+            lan_code = "en"
 
     with open("welcome.json", "r") as f:
-        list = load(f)[code]
+        wlc_mess_list = load(f)[lan_code]
 
     #collapse when removing debug prints
-    wlc_txt = list[randrange(0,2)].replace("USER",new_member_username)
+    wlc_txt = wlc_mess_list[randrange(0,len(wlc_mess_list))].replace("USER", new_member_username)
     print(wlc_txt)
     return wlc_txt
 
