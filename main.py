@@ -11,7 +11,6 @@ def get_new_user_name(user: User) -> str:
 
 def generate_welcome(new_member: User) -> str:
     new_member_username = get_new_user_name(new_member)
-    print(new_member['language_code'])
 
     match new_member["language_code"]:
         case "it":
@@ -22,9 +21,7 @@ def generate_welcome(new_member: User) -> str:
     with open("welcome.json", "r") as f:
         wlc_mess_list = load(f)[lan_code]
 
-    #collapse when removing debug prints
-    wlc_txt = wlc_mess_list[randrange(0,len(wlc_mess_list))].replace("USER", new_member_username)
-    print(wlc_txt)
+    wlc_txt = wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
     return wlc_txt
 
 
