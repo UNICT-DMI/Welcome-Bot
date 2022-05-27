@@ -12,13 +12,18 @@ def get_new_user_name(user: dict) -> str:
 def generate_welcome(new_member) -> str:
     new_member_username = get_new_user_name(new_member)
     print(new_member['language_code'])
-    #print(type(new_member['language_code']))
 
-    # TODO: refactor, more entries in welcome.json
+    match new_member["language_code"]:
+        case "it":
+            code = "it"
+        case "en" | _ :
+            code = "en"
+
     with open("welcome.json", "r") as f:
-        list = load(f)[new_member["language_code"] if type(new_member["language_code"]) == type("una stringa") else "en"]
-    wlc_txt = list[randrange(0,2)].replace("USER",new_member_username)
+        list = load(f)[code]
 
+    #collapse when removing debug prints
+    wlc_txt = list[randrange(0,2)].replace("USER",new_member_username)
     print(wlc_txt)
     return wlc_txt
 
