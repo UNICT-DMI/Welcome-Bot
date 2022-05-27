@@ -1,12 +1,12 @@
 from os import getenv
-from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters, User
+from telegram import Update, User
+from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
 from json import load
 from random import randrange
 
 
 def get_new_user_name(user: User) -> str:
-    return f"@{user['username']}" if "username" in user else user['first_name']
+    return f"@{user['username']}" if user['username'] is not None else user['first_name']
 
 
 def generate_welcome(new_member: User) -> str:
