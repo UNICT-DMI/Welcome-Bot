@@ -1,17 +1,16 @@
 from os import getenv
-from telegram import Update
+from telegram import Update, User
 from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
 from json import load
 from random import randrange
 
 
-def get_new_user_name(user: dict) -> str:
-    return f"@{user['username']}" if "username" in user else user['first_name']
+def get_new_user_name(user: User) -> str:
+    return f"@{user['username']}" if user['username'] is not None else user['first_name']
 
 
-def generate_welcome(new_member: dict) -> str:
+def generate_welcome(new_member: User) -> str:
     new_member_username = get_new_user_name(new_member)
-    print(new_member['language_code'])
 
     match new_member["language_code"]:
         case "it":
@@ -22,10 +21,7 @@ def generate_welcome(new_member: dict) -> str:
     with open("welcome.json", "r") as f:
         wlc_mess_list = load(f)[lan_code]
 
-    #collapse when removing debug prints
-    wlc_txt = wlc_mess_list[randrange(0,len(wlc_mess_list))].replace("USER", new_member_username)
-    print(wlc_txt)
-    return wlc_txt
+    return wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
 
 
 async def send_welcome(update: Update, ctx: CallbackContext) -> None:
