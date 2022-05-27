@@ -1,8 +1,8 @@
 from os import getenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
-import json
-import random
+from json import load
+from random import randrange
 
 
 def get_new_user_name(user: dict) -> str:
@@ -10,17 +10,14 @@ def get_new_user_name(user: dict) -> str:
     return f"@{user['username']}" if user['username'] != '' else user['first_name']
 
 def generate_welcome(new_member) -> str:
-
     new_member_username = get_new_user_name(new_member)
-
     print(new_member['language_code'])
     #print(type(new_member['language_code']))
 
     # TODO: refactor, more entries in welcome.json
-    wlc_txt = ""
     with open("welcome.json", "r") as f:
-        list = json.load(f)[new_member["language_code"] if type(new_member["language_code"]) == type("una stringa") else "en"]
-        wlc_txt = list[random.randrange(0,2)].replace("USER",new_member_username)
+        list = load(f)[new_member["language_code"] if type(new_member["language_code"]) == type("una stringa") else "en"]
+    wlc_txt = list[randrange(0,2)].replace("USER",new_member_username)
 
     print(wlc_txt)
     return wlc_txt
