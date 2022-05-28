@@ -20,9 +20,9 @@ tests = [
         'func': main.send_welcome, 
         'expected_res': None, 
         'arg': (main.Update(0, message=Message(0, new_chat_members=possible_users, chat=Chat(0, type='GROUP'), date=datetime.now())), None),
-        'mock_obj': Message,
-        'mock_func': 'reply_text',
-        'mock_ret': True,
+        'mock_obj': [Message],
+        'mock_func': ['reply_text'],
+        'mock_ret': [True],
         'is_async': True
     }
 ]
@@ -30,11 +30,20 @@ tests = [
 @pytest.mark.parametrize('test', tests)
 async def test_generic(mocker: MockerFixture, test: dict) -> None:
     if test.get('mock_obj') is not None:
-        mocker.patch.object(test['mock_obj'], test['mock_func'], return_value=test['mock_ret'])
-    
+        for index, obj in enumerate(test['mock_obj']):
+            mocker.patch.object(obj, test['mock_func'][index], return_value=test['mock_ret'][index])
+
     if test['is_async']:
         res = await test['func'](*test['arg'])
     else:
         res = test['func'](*test['arg'])
 
     assert res == test['expected_res']
+
+
+def test_main(mocker: MockerFixture) -> None:
+    mocker.patch.object(main, "__name__", "__main__")
+    mocker.patch.object(main, 'main', return_value=None)
+
+    assert main.init() == None
+    

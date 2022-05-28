@@ -39,5 +39,8 @@ def main() -> None:
     app.run_polling()
     
 
-if __name__ == '__main__':
-    main()
+def init() -> None:
+    if __name__ == '__main__':
+        main()
+
+init()
