@@ -24,7 +24,7 @@ def generate_welcome(new_member: User) -> str:
     return wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
 
 
-async def send_welcome(update: Update, ctx: CallbackContext) -> None:
+async def send_welcome(update: Update, _: CallbackContext) -> None:
     for new_member in update['message']['new_chat_members']:
         if not new_member['is_bot']:
             await update.message.reply_text(f'{generate_welcome(new_member)}')
