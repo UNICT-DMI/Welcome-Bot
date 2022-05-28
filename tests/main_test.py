@@ -1,6 +1,8 @@
+from multiprocessing.pool import ApplyResult
 import pytest
 from pytest_mock import MockerFixture
 from telegram import Message, Chat
+from telegram.ext import Application
 from datetime import datetime
 import src.main as main
 
@@ -52,6 +54,15 @@ tests = [
         'mock_obj': [main],
         'mock_func': ['randrange'],
         'mock_ret': [0],
+        'is_async': False
+    },
+    {
+        'func': main.main,
+        'expected_res': None, 
+        'arg': tuple(), 
+        'mock_obj': [main, Application],
+        'mock_func': ['getenv', 'run_polling'],
+        'mock_ret': ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', True],
         'is_async': False
     }
 ]
