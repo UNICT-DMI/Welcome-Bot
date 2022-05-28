@@ -1,4 +1,3 @@
-from multiprocessing.pool import ApplyResult
 import pytest
 from pytest_mock import MockerFixture
 from telegram import Message, Chat
