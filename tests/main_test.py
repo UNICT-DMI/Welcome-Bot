@@ -4,11 +4,22 @@ from telegram import Message, Chat
 from datetime import datetime
 import src.main as main
 
+
+def get_wel(lan_code: str) -> str:
+
+    with open("src/welcome.json", "r") as f:
+        wlc_mess_list = main.load(f)[lan_code]
+    
+    #first element of the list
+    return wlc_mess_list[0].replace("USER","@user")
+
 possible_users = [
     main.User(id=0, first_name='user', is_bot=True, username='user'),  # bot with username
     main.User(id=0, first_name='user', is_bot=True),                   # bot without username
     main.User(id=0, first_name='user', is_bot=False, username='user'), # user with username
-    main.User(id=0, first_name='user', is_bot=False)                   # user without username
+    main.User(id=0, first_name='user', is_bot=False),                   # user without username
+    main.User(id=0, first_name='user', is_bot=False, username='user', language_code='it'), # italian user
+    main.User(id=0, first_name='user', is_bot=False, username='user', language_code='en') # english user (same codepath as language_code=None)
 ]
 
 tests = [
@@ -24,6 +35,24 @@ tests = [
         'mock_func': ['reply_text'],
         'mock_ret': [True],
         'is_async': True
+    },
+    {
+        'func': main.generate_welcome,
+        'expected_res': get_wel('it'), 
+        'arg': (possible_users[4],), 
+        'mock_obj': [main],
+        'mock_func': ['randrange'],
+        'mock_ret': [0],
+        'is_async': False
+    },
+    {
+        'func': main.generate_welcome,
+        'expected_res': get_wel('en'), 
+        'arg': (possible_users[5],), 
+        'mock_obj': [main],
+        'mock_func': ['randrange'],
+        'mock_ret': [0],
+        'is_async': False
     }
 ]
 
