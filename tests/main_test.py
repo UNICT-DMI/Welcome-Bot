@@ -3,7 +3,17 @@ from pytest_mock import MockerFixture
 from telegram import Message, Chat
 from datetime import datetime
 import src.main as main
+from json import load
 from random import randrange
+
+
+def get_wel(lan_code: str) -> str:
+
+    with open("src/welcome.json", "r") as f:
+        wlc_mess_list = load(f)[lan_code]
+    
+    #first element of the list
+    return wlc_mess_list[0].replace("USER","@user")
 
 possible_users = [
     main.User(id=0, first_name='user', is_bot=True, username='user'),  # bot with username
@@ -30,7 +40,7 @@ tests = [
     },
     {
         'func': main.generate_welcome,
-        'expected_res': 'Benvenuto @user nel nostro gruppo ^-^', 
+        'expected_res': get_wel('it'), 
         'arg': (possible_users[4],), 
         'mock_obj': [main],
         'mock_func': ['randrange'],
@@ -39,14 +49,13 @@ tests = [
     },
     {
         'func': main.generate_welcome,
-        'expected_res': 'Welcome @user to our group ^-^', 
+        'expected_res': get_wel('en'), 
         'arg': (possible_users[5],), 
         'mock_obj': [main],
         'mock_func': ['randrange'],
         'mock_ret': [0],
         'is_async': False
     }
-    #{'func': main.generate_welcome, 'expected_res': 'Welcome @user to our group ^-^', 'arg': (possible_users[5],), 'is_async': False}
 ]
 
 @pytest.mark.parametrize('test', tests)
