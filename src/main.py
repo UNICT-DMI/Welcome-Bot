@@ -18,7 +18,7 @@ def generate_welcome(new_member: User) -> str:
         case "en" | _ :
             lan_code = "en"
 
-    with open("welcome.json", "r") as f:
+    with open("src/welcome.json", "r") as f:
         wlc_mess_list = load(f)[lan_code]
 
     return wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
