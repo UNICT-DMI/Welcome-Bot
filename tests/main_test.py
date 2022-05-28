@@ -8,7 +8,9 @@ possible_users = [
     main.User(id=0, first_name='user', is_bot=True, username='user'),  # bot with username
     main.User(id=0, first_name='user', is_bot=True),                   # bot without username
     main.User(id=0, first_name='user', is_bot=False, username='user'), # user with username
-    main.User(id=0, first_name='user', is_bot=False)                   # user without username
+    main.User(id=0, first_name='user', is_bot=False),                   # user without username
+    main.User(id=0, first_name='user', is_bot=False, username='user', language_code='it'), # italian user
+    main.User(id=0, first_name='user', is_bot=False, username='user', language_code='en') # english user (same codepath as language_code=None)
 ]
 
 tests = [
@@ -24,7 +26,9 @@ tests = [
         'mock_func': ['reply_text'],
         'mock_ret': [True],
         'is_async': True
-    }
+    },
+    {'func': main.generate_welcome, 'expected_res': 'Benvenuto @user nel nostro gruppo ^-^', 'arg': (possible_users[4],), 'is_async': False},
+    {'func': main.generate_welcome, 'expected_res': 'Welcome @user to our group ^-^', 'arg': (possible_users[5],), 'is_async': False}
 ]
 
 @pytest.mark.parametrize('test', tests)
