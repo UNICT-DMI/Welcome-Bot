@@ -4,7 +4,6 @@ from telegram import Message, Chat
 from datetime import datetime
 import src.main as main
 from json import load
-from random import randrange
 
 
 def get_wel(lan_code: str) -> str:
