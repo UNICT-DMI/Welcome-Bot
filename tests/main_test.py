@@ -3,6 +3,7 @@ from pytest_mock import MockerFixture
 from telegram import Message, Chat
 from datetime import datetime
 import src.main as main
+from random import randrange
 
 possible_users = [
     main.User(id=0, first_name='user', is_bot=True, username='user'),  # bot with username
@@ -27,8 +28,25 @@ tests = [
         'mock_ret': [True],
         'is_async': True
     },
-    {'func': main.generate_welcome, 'expected_res': 'Benvenuto @user nel nostro gruppo ^-^', 'arg': (possible_users[4],), 'is_async': False},
-    {'func': main.generate_welcome, 'expected_res': 'Welcome @user to our group ^-^', 'arg': (possible_users[5],), 'is_async': False}
+    {
+        'func': main.generate_welcome,
+        'expected_res': 'Benvenuto @user nel nostro gruppo ^-^', 
+        'arg': (possible_users[4],), 
+        'mock_obj': [main],
+        'mock_func': ['randrange'],
+        'mock_ret': [0],
+        'is_async': False
+    },
+    {
+        'func': main.generate_welcome,
+        'expected_res': 'Welcome @user to our group ^-^', 
+        'arg': (possible_users[5],), 
+        'mock_obj': [main],
+        'mock_func': ['randrange'],
+        'mock_ret': [0],
+        'is_async': False
+    }
+    #{'func': main.generate_welcome, 'expected_res': 'Welcome @user to our group ^-^', 'arg': (possible_users[5],), 'is_async': False}
 ]
 
 @pytest.mark.parametrize('test', tests)
