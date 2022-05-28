@@ -3,13 +3,12 @@ from pytest_mock import MockerFixture
 from telegram import Message, Chat
 from datetime import datetime
 import src.main as main
-from json import load
 
 
 def get_wel(lan_code: str) -> str:
 
     with open("src/welcome.json", "r") as f:
-        wlc_mess_list = load(f)[lan_code]
+        wlc_mess_list = main.load(f)[lan_code]
     
     #first element of the list
     return wlc_mess_list[0].replace("USER","@user")
