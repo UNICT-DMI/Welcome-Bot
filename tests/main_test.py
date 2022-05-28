@@ -41,7 +41,7 @@ async def test_generic(mocker: MockerFixture, test: dict) -> None:
     assert res == test['expected_res']
 
 
-def test_main(mocker: MockerFixture) -> None:
+def test_init(mocker: MockerFixture) -> None:
     mocker.patch.object(main, "__name__", "__main__")
     mocker.patch.object(main, 'main', return_value=None)
 
