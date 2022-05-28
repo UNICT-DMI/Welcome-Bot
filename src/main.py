@@ -22,7 +22,6 @@ def generate_welcome(new_member: User) -> str:
         wlc_mess_list = load(f)[lan_code]
 
     return wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
-    #return wlc_mess_list[0].replace("USER", new_member_username)
 
 
 async def send_welcome(update: Update, _: CallbackContext) -> None:
