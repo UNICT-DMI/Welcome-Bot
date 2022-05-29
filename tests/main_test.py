@@ -68,9 +68,11 @@ tests = [
 
 @pytest.mark.parametrize('test', tests)
 async def test_generic(mocker: MockerFixture, test: dict) -> None:
+    spyed_objects = []
     if test.get('mock_obj') is not None:
         for index, obj in enumerate(test['mock_obj']):
             mocker.patch.object(obj, test['mock_func'][index], return_value=test['mock_ret'][index])
+            spyed_objects.append(mocker.spy(obj, test['mock_func'][index]))
 
     if test['is_async']:
         res = await test['func'](*test['arg'])
@@ -78,6 +80,8 @@ async def test_generic(mocker: MockerFixture, test: dict) -> None:
         res = test['func'](*test['arg'])
 
     assert res == test['expected_res']
+    for index, spy in enumerate(spyed_objects):
+        assert spy.spy_return == test['mock_ret'][index]
 
 
 def test_init(mocker: MockerFixture) -> None:
