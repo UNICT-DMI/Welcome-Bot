@@ -85,8 +85,10 @@ async def test_generic(mocker: MockerFixture, test: dict) -> None:
 
 
 def test_init(mocker: MockerFixture) -> None:
-    mocker.patch.object(main, "__name__", "__main__")
+    mocker.patch.object(main, '__name__', '__main__')
     mocker.patch.object(main, 'main', return_value=None)
+    spy = mocker.spy(main, 'main')
 
     assert main.init() == None
+    assert spy.spy_return == None
     
