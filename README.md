@@ -1,5 +1,6 @@
 # Welcome Bot
 ![CI Badge](https://github.com/QD-2022/Welcome-Bot/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/QD-2022/Welcome-Bot/branch/main/graph/badge.svg?token=QCEZL2UKWD)](https://codecov.io/gh/QD-2022/Welcome-Bot)
 
 <p align="center">
     <img src="icon.jpeg" alt="logo" width="200">
