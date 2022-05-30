@@ -24,10 +24,10 @@ possible_users = [
 ]
 
 tests = [
-    {'func': main.get_new_user_name, 'expected_res': '@user', 'arg': (possible_users[0],), 'is_async': False},
-    {'func': main.get_new_user_name, 'expected_res': 'user',  'arg': (possible_users[1],), 'is_async': False},
-    {'func': main.get_new_user_name, 'expected_res': '@user', 'arg': (possible_users[2],), 'is_async': False},
-    {'func': main.get_new_user_name, 'expected_res': 'user',  'arg': (possible_users[3],), 'is_async': False},
+    {'func': main.get_new_user_name, 'expected_res': '@user', 'arg': (possible_users[0],)},
+    {'func': main.get_new_user_name, 'expected_res': 'user',  'arg': (possible_users[1],)},
+    {'func': main.get_new_user_name, 'expected_res': '@user', 'arg': (possible_users[2],)},
+    {'func': main.get_new_user_name, 'expected_res': 'user',  'arg': (possible_users[3],)},
     { 
         'func': main.send_welcome, 
         'expected_res': None, 
@@ -43,8 +43,7 @@ tests = [
         'arg': (possible_users[4],), 
         'mock_obj': [main],
         'mock_func': ['randrange'],
-        'mock_ret': [0],
-        'is_async': False
+        'mock_ret': [0]
     },
     {
         'func': main.generate_welcome,
@@ -52,8 +51,7 @@ tests = [
         'arg': (possible_users[5],), 
         'mock_obj': [main],
         'mock_func': ['randrange'],
-        'mock_ret': [0],
-        'is_async': False
+        'mock_ret': [0]
     },
     {
         'func': main.main,
@@ -61,8 +59,7 @@ tests = [
         'arg': tuple(), 
         'mock_obj': [main, Application],
         'mock_func': ['getenv', 'run_polling'],
-        'mock_ret': ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', True],
-        'is_async': False
+        'mock_ret': ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', True]
     }
 ]
 
@@ -74,7 +71,7 @@ async def test_generic(mocker: MockerFixture, test: dict) -> None:
             mocker.patch.object(obj, test['mock_func'][index], return_value=test['mock_ret'][index])
             spyed_objects.append(mocker.spy(obj, test['mock_func'][index]))
 
-    if test['is_async']:
+    if test.get('is_async'):
         res = await test['func'](*test['arg'])
     else:
         res = test['func'](*test['arg'])
