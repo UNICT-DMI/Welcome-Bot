@@ -13,9 +13,9 @@ def generate_welcome(new_member: User) -> str:
     new_member_username = get_new_user_name(new_member)
 
     match new_member["language_code"]:
-        case "it":
+        case "it" | _ :
             lan_code = "it"
-        case "en" | _ :
+        case "en":
             lan_code = "en"
 
     with open("src/welcome.json", "r") as f:
