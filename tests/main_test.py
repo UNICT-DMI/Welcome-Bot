@@ -3,7 +3,7 @@ from pytest_mock import MockerFixture
 from telegram import Message, Chat
 from telegram.ext import Application
 from datetime import datetime
-import src.main as main
+import main as main
 
 
 def get_wel(lan_code: str) -> str:

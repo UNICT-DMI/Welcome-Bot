@@ -14,7 +14,7 @@ Just set a `QDBotToken` env variable, this is your bot token obtained from [BotF
 
 ### Example in bash
 ```bash
-export QDBotToken="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" # Your bot token
+export TOKEN="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" # Your bot token
 ```
 
 ## Write Unit Tests
