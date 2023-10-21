@@ -1,4 +1,11 @@
 {
     "it": ["Benvenuto USER nel nostro gruppo ^-^","Ciao USER!","Salve USER!"],
-    "en": ["Welcome USER to our group ^-^","Hello USER!","Howdy USER!"]
+    "en": ["Welcome USER to our group ^-^","Hello USER!","Howdy USER!"],
+    "readme": "https://t.me/c/1095167198/67194",
+    "utils": [
+            "Se hai idee o suggerimenti, condividili con noi. Siamo aperti a nuove prospettive!", 
+            "Non esitare a fare domande se hai bisogno di aiuto.",
+            "Speriamo che ti possa sentire come a casa tua.", 
+            "Ricorda di rispettare le opinioni degli altri membri, anche se non sempre concordi. La diversità ci arricchisce."
+        ]
 }

@@ -23,6 +23,14 @@ def generate_welcome(new_member: User) -> str:
 
 
 def send_welcome(update: Update, _: CallbackContext) -> None:
-    for new_member in update['message']['new_chat_members']:
-        if not new_member['is_bot']:
-            update.message.reply_text(f'{generate_welcome(new_member)}')
+    if update.message.new_chat_members:
+        for new_member in update.message.new_chat_members:
+            if not new_member.is_bot:
+                handle_welcome(update, new_member)
+
+
+def handle_welcome(update: Update, new_member: User) -> None:
+        welcome_msg = f'{generate_welcome(new_member)}\n' + \
+                      f"- Dai un'occhiata al [README]({welcome['readme']})\n" + \
+                      f"- {welcome['utils'][randrange(0, len(welcome['utils']))]}"
+        update.message.reply_markdown(welcome_msg, disable_web_page_preview=True)
