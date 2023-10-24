@@ -8,7 +8,6 @@ from random import randrange
 def get_new_user_name(user: User) -> str:
     return f"@{user['username']}" if user['username'] is not None else user['first_name']
 
-
 def generate_welcome(new_member: User) -> str:
     new_member_username = get_new_user_name(new_member)
 
