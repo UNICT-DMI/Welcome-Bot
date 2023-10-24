@@ -22,6 +22,7 @@ In order to write Unit Tests, you have to put it inside `tests`.
 There are many possibilities, for example it's possible to add a new user appending a `User` object in `possible_users`.
 As generic Unit Tests it is possible to add a new test, appending it to `tests`.
 
+
 ### Unit Tests without mocking
 To add a new unit test without mocking, there are some examples at the beginning of `tests`, but let's inspect how they're implemented:
 - `func`: simply the function to mock
