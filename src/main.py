@@ -21,13 +21,20 @@ def generate_welcome(new_member: User) -> str:
     with open("src/welcome.json", "r") as f:
         wlc_mess_list = load(f)[lan_code]
 
-    return wlc_mess_list[randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
+    return wlc_mess_list['sentences'][randrange(0, len(wlc_mess_list))].replace("USER", new_member_username)
 
 
 async def send_welcome(update: Update, _: CallbackContext) -> None:
     for new_member in update['message']['new_chat_members']:
         if not new_member['is_bot']:
-            await update.message.reply_text(f'{generate_welcome(new_member)}')
+            lan_code = new_member["language_code"] or "it"
+            with open("src/welcome.json", "r") as f:
+                welcome_file = load(f)
+
+            welcome_msg = f'{generate_welcome(new_member)}\n'\
+                f'- README: 👉 {welcome_file["readme"]}\n'\
+                f'- {welcome_file[lan_code]["utils"][randrange(0, len(welcome_file[lan_code]["utils"]))]}'
+            await update.message.reply_text(f'{welcome_msg}')
 
 def main() -> None:
     token = getenv("QDBotToken")
