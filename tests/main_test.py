@@ -9,7 +9,7 @@ import src.main as main
 def get_wel(lan_code: str) -> str:
 
     with open("src/welcome.json", "r") as f:
-        wlc_mess_list = main.load(f)[lan_code]
+        wlc_mess_list = main.load(f)[lan_code]['sentences']
     
     #first element of the list
     return wlc_mess_list[0].replace("USER","@user")

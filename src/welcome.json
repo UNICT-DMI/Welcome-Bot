@@ -1,4 +1,21 @@
 {
-    "it": ["Benvenuto USER nel nostro gruppo ^-^","Ciao USER!","Salve USER!"],
-    "en": ["Welcome USER to our group ^-^","Hello USER!","Howdy USER!"]
+    "it": {
+        "sentences" : ["Benvenuto USER nel nostro gruppo ^-^","Ciao USER!","Salve USER!"],
+        "utils" : [
+            "Se hai idee o suggerimenti, condividili con noi. Siamo aperti a nuove prospettive", 
+            "Non esitare a fare domande se hai bisogno di aiuto",
+            "Speriamo che ti possa sentire come a casa tua", 
+            "Ricorda di rispettare le opinioni degli altri membri, anche se non sempre concordi. La diversità ci arricchisce"
+        ]
+    },
+    "en": {
+        "sentences" : ["Welcome USER to our group ^-^","Hello USER!","Howdy USER!"],
+        "utils" : [
+            "If you have ideas or suggestions, please share them with us. We are open to new perspectives!",
+            "Don't hesitate to ask questions if you need help",
+            "We hope you can feel at home",
+            "Remember to respect other members' opinions, even if you don't always agree. Diversity enriches us."
+        ]
+    },
+    "readme" : "https://t.me/c/1095167198/67194"
 }
