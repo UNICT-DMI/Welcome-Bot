@@ -6,7 +6,8 @@
             "Non esitare a fare domande se hai bisogno di aiuto",
             "Speriamo che ti possa sentire come a casa tua", 
             "Ricorda di rispettare le opinioni degli altri membri, anche se non sempre concordi. La diversità ci arricchisce"
-        ]
+        ],
+        "start_message": "Ciao! Sono il Welcome-Bot, aggiungimi a un gruppo per dare il benvenuto ai nuovi membri!"
     },
     "en": {
         "sentences" : ["Welcome USER to our group ^-^","Hello USER!","Howdy USER!"],
@@ -15,7 +16,8 @@
             "Don't hesitate to ask questions if you need help",
             "We hope you can feel at home",
             "Remember to respect other members' opinions, even if you don't always agree. Diversity enriches us."
-        ]
+        ],
+        "start_message": "Hi! I'm the Welcome-Bot, add me to a group to welcome your new users!"
     },
     "readme" : "https://t.me/c/1095167198/67194/67418"
 }
