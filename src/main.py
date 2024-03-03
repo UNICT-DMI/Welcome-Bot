@@ -1,6 +1,6 @@
 from os import getenv
 from telegram import Update, User
-from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, filters
+from telegram.ext import ApplicationBuilder, MessageHandler, CallbackContext, CommandHandler, filters
 from json import load
 from random import randrange
 
@@ -36,12 +36,26 @@ async def send_welcome(update: Update, _: CallbackContext) -> None:
                 f'- {welcome_file[lan_code]["utils"][randrange(0, len(welcome_file[lan_code]["utils"]))]}'
             await update.message.reply_text(f'{welcome_msg}')
 
+
+async def command_start(update: Update, _) -> None:
+    lan_code = 'it' if update.message.from_user.language_code == 'it' else 'en'
+    reply = ''
+    
+    with open("src/welcome.json", "r") as f:
+        reply = load(f)[lan_code]['start_message']
+        
+    await update.message.reply_text(reply)
+
+
 def main() -> None:
     token = getenv("QDBotToken")
     app = ApplicationBuilder().token(token).build()
     app.add_handler(MessageHandler(
         filters.ChatType.GROUPS & filters.StatusUpdate.NEW_CHAT_MEMBERS, 
         send_welcome
+    ))
+    app.add_handler(CommandHandler(
+        "start", command_start
     ))
     app.run_polling()
     
