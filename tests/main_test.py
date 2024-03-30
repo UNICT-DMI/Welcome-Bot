@@ -9,7 +9,7 @@ import src.main as main
 def get_wel(lan_code: str) -> str:
 
     with open("src/welcome.json", "r") as f:
-        wlc_mess_list = main.load(f)[lan_code]
+        wlc_mess_list = main.load(f)[lan_code]['sentences']
     
     #first element of the list
     return wlc_mess_list[0].replace("USER","@user")
@@ -60,6 +60,24 @@ tests = [
         'mock_obj': [main, Application],
         'mock_func': ['getenv', 'run_polling'],
         'mock_ret': ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', True]
+    },
+    {
+        'func': main.command_start, 
+        'expected_res': None, 
+        'arg': (main.Update(0, message=Message(0, from_user=possible_users[4], chat=Chat(0, type='GROUP'), date=datetime.now())), None),
+        'mock_obj': [Message],
+        'mock_func': ['reply_text'],
+        'mock_ret': [True],
+        'is_async': True
+    },
+    {
+        'func': main.command_start, 
+        'expected_res': None, 
+        'arg': (main.Update(0, message=Message(0, from_user=possible_users[5], chat=Chat(0, type='GROUP'), date=datetime.now())), None),
+        'mock_obj': [Message],
+        'mock_func': ['reply_text'],
+        'mock_ret': [True],
+        'is_async': True
     }
 ]
 
